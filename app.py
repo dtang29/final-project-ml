@@ -14,10 +14,18 @@ mongo = PyMongo(app)
 # create route that renders index.html template
 @app.route("/", methods=["GET","POST"])
 def echo():
-    name = request.args.get('key')
-    # return render_template("index.html", text="Serving up cool text from the Flask server!!")
-    return "Your key is {}".format(name)
+    key = request.args.get('key')
+    value = request.args.get('value')
+    query = {
+        "key" : key,
+        "value" : value
+    }
+    return render_template("index.html", query=query)
+    
 
+@app.route("/api/testing")
+def testing():
+    return "hello"
 
 @app.route("/api/mongodb")
 def mongodb():
