@@ -33,13 +33,13 @@ logger.addHandler(ch)
 # With a "Google Maps Geocoding API" key from https://console.developers.google.com/apis/, 
 # the daily limit will be 2500, but at a much faster rate.
 # Example: API_KEY = 'AIzaSyC9azed9tLdjpZNjg2_kVePWvMIBq154eA'
-API_KEY = 'AIzaSyASCNPmKV7lIOUtbnkPNJFfg47IpcWwdO4'
+API_KEY = 'AIzaSyDFmIEJ-ymN1_3AM3z3YTwwszjvolyziU8'
 # Backoff time sets how many minutes to wait between google pings when your API limit is hit
 BACKOFF_TIME = 30
 # Set your output file name here.
 output_filename = 'Cleaned Datasets/addresses-2018.csv'
 # Set your input file here
-input_filename = "Cleaned Datasets/cleaned_registered_businesses.csv"
+input_filename = "Cleaned Datasets/cleaned_registered_food_services.csv"
 # Specify the column name in your input data that contains addresses here
 address_column_name = "street_address"
 # Return Full Google Results? If True, full JSON results from Google are included in output
