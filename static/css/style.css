@@ -1,0 +1,160 @@
+body {
+    font-family: 'Lato';
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Catamaran';
+    font-weight: 800 !important;
+  }
+
+  .swiper-container {
+    width: 600px;
+    height: 300px;
+}
+  
+  .btn-xl {
+    text-transform: uppercase;
+    padding: 1.5rem 3rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+  }
+  
+  .bg-black {
+    background-color: #000 !important;
+  }
+  
+  .rounded-pill {
+    border-radius: 5rem;
+  }
+  
+  .navbar-custom {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .navbar-custom .navbar-brand {
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+  }
+  
+  .navbar-custom .navbar-nav .nav-item .nav-link {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+  }
+  
+  header.masthead {
+    position: relative;
+    overflow: hidden;
+    padding-top: calc(7rem + 72px);
+    padding-bottom: 7rem;
+    background: linear-gradient(0deg, #000A0D 0%, #008DB8 100%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    background-size: cover;
+  }
+  
+  header.masthead .masthead-content {
+    z-index: 1;
+    position: relative;
+  }
+
+  header.masthead .masthead-content .masthead-heading {
+    font-size: 4rem;
+    color: white;
+  }
+  
+  header.masthead .masthead-content .masthead-subheading {
+    font-size: 2rem;
+    color: white;
+
+  }
+
+  
+  @media (min-width: 992px) {
+    header.masthead {
+      padding-top: calc(10rem + 55px);
+      padding-bottom: 10rem;
+    }
+    header.masthead .masthead-content .masthead-heading {
+      font-size: 6rem;
+    }
+    header.masthead .masthead-content .masthead-subheading {
+      font-size: 4rem;
+    }
+  }
+  
+  .bg-primary {
+    background-color: #ee0979 !important;
+  }
+  
+  .btn-primary {
+    background-color: #ee0979;
+    border-color: #ee0979;
+  }
+  
+  .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    background-color: #bd0760 !important;
+    border-color: #bd0760 !important;
+  }
+  
+  .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
+  }
+  
+  .btn-secondary {
+    background-color: #ff6a00;
+    border-color: #ff6a00;
+  }
+  
+  .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
+    background-color: #cc5500 !important;
+    border-color: #cc5500 !important;
+  }
+  
+  .btn-secondary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
+  }
+  
+   /* Remove the navbar's default margin-bottom and rounded borders */ 
+   .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  
+  /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+  .row.content {height: 450px}
+  
+  /* Set gray background color and 100% height */
+  .sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+  }
+  
+  /* Set black background color, white text and some padding */
+  footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+  }
+  
+  /* On small screens, set height to 'auto' for sidenav and grid */
+  @media screen and (max-width: 767px) {
+    .sidenav {
+      height: auto;
+      padding: 15px;
+    }
+    .row.content {height:auto;} 
+  }
