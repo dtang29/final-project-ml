@@ -118,8 +118,8 @@
 
 
  <!-- Swiper -->
- <div class="swiper-container">
-  <div class="swiper-wrapper">
+ <div class="swiper-container swiper-container-vertical">
+  <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, -888px, 0px);">
     <div class="swiper-slide slide1">
         <div class="swiper-text">
           <div class="title_div">A Predictive Viability Model for San Francisco Restaurants</div>
@@ -222,6 +222,11 @@
       hideOnClick: false,
     },
     });
+
+    $('.swiper-slide').click(function(e) {
+      e.preventDefault();
+      swiper.slideNext();
+    })
   </script>
 
 
