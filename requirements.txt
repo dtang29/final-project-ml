@@ -110,7 +110,7 @@ mpmath==1.0.0
 mrjob==0.6.3
 msgpack-python==0.5.1
 multipledispatch==0.4.9
-nb-anacondacloud==1.4.0
+nb-anacondacloud
 nb-conda==2.2.1
 nb-conda-kernels==2.1.0
 nbconvert==5.3.1
