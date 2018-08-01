@@ -14,34 +14,11 @@ mongo = PyMongo(app)
 # create route that renders index.html template
 @app.route("/", methods=["GET","POST"])
 def echo():
-    key = request.args.get('key')
-    value = request.args.get('value')
-    query = {
-        "key" : key,
-        "value" : value
-    }
-    return render_template("index.html", query=query)
-    
+    return render_template("index.html")    
 
-@app.route("/api/testing")
-def testing():
-    return "hello"
-
-@app.route("/api/mongodb")
-def mongodb():
-    path = "Resources/test.json"
-
-    #Create a new mongodb database with collection named "test"
-    test = mongo.db.test
-
-    #Read in the json file and write it into the mongo db
-    with open(path, 'r') as dataset1_file:
-        data = json.load(dataset1_file)
-        for x in data:
-            test.insert(x)
-
-    return redirect("/", code=302)
-
+@app.route("/plots")
+def plots():
+    return render_template("plots.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
