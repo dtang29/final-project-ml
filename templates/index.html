@@ -81,6 +81,7 @@
 
     .byline {
       font-size: .4em;
+      font-style:italic;
       line-height: 2.2em;
       font-weight: 500;
       color: white;
@@ -116,6 +117,16 @@
       }
     }
 
+    .swiper-text .nav {
+      display: block;
+      position: absolute;
+      font-size: 20px;
+      color:honeydew;
+      font-weight: 700;
+      -webkit-transform: translate(-50%, 0);
+      left: 50%;
+    }
+
   </style>
 
 </head>
@@ -149,9 +160,14 @@
   <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, -888px, 0px);">
     <div class="swiper-slide slide1">
         <div class="swiper-text">
-          <div class="title_div">A Predictive Viability Model for San Francisco Restaurants</div>
+          <div class="title_div">
+            A Predictive Viability Model for San Francisco Restaurants
+          </div>
             <div class="byline" style="opacity: 1;">
                 Project By: Alex Pundyk, Charlie Fortuno, Daniel Tang, Hadrien Picq
+            </div>
+            <div class="nav">
+              Click or press ↓
             </div>
         </div>
     </div>
@@ -257,7 +273,18 @@
     $('.swiper-slide').click(function(e) {
       e.preventDefault();
       swiper.slideNext();
-    })
+    });
+
+    document.onkeydown = function(e) {
+      e.preventDefault();
+      switch (e.key) {
+        case 'ArrowUp':
+          swiper.slidePrev();
+          break;
+        case 'ArrowDown':
+          swiper.slideNext();
+      }
+    };
   </script>
 
 
