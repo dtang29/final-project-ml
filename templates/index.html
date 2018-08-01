@@ -68,6 +68,17 @@
       
     }
 
+    .slide2 {
+      display: grid;
+      height: 100%;
+    }
+
+    .center-fit {
+      max-width: 100%;
+      max-height: 100vh;
+      margin: auto;
+    }
+
     .byline {
       font-size: .4em;
       line-height: 2.2em;
@@ -75,14 +86,29 @@
       color: white;
     }
 
-    @media (min-width: 992px) {
-      .swiper-text {
-        position: absolute;
+    .swiper-text {
+        position: relative;
         font-size: 2.5em;
         line-height: 1.2em;
         font-weight: 600;
-        top: 33%;
+        top: 28%;
         right: 45%;
+        left: 10%;
+        margin: 0;
+        padding-right: 30px;
+        max-width: 600px;
+        color: white;
+      }
+
+    @media (max-width: 600px) {
+      .swiper-text {
+        position: absolute;
+        font-size: 2.3em;
+        line-height: 1.2em;
+        font-weight: 600;
+        top: 10%;
+        right: 20%;
+        left: 20%;
         margin: 0;
         padding-right: 30px;
         max-width: 600px;
@@ -130,7 +156,7 @@
         </div>
     </div>
     <div class="swiper-slide slide2">
-        <img src="../static/images/process.jpeg">
+        <img class="center-fit" src="../static/images/process.jpeg">
     </div>
     <div class="swiper-slide slide3">
         <!-- 16:9 aspect ratio -->
