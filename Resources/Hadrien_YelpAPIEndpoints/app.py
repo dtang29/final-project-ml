@@ -24,7 +24,7 @@ def search_restaurants(set_num):
 
 
 if __name__ == "__main__":
-    for offset_num in np.arange(50,1001,50) :
+    for offset_num in np.arange(50,1000,50) :
         try:
             output_json = search_restaurants(offset_num)
             print(offset_num)
