@@ -33,15 +33,15 @@ logger.addHandler(ch)
 # With a "Google Maps Geocoding API" key from https://console.developers.google.com/apis/, 
 # the daily limit will be 2500, but at a much faster rate.
 # Example: API_KEY = 'AIzaSyC9azed9tLdjpZNjg2_kVePWvMIBq154eA'
-API_KEY = 'AIzaSyBmZ4D-nf2fVKMn21RqmKihUmiZROkTKIU'
+API_KEY = 'AIzaSyBk3D2sqnrqJyq6Bsp_aYeZrfYj1nBHUVQ'
 # Backoff time sets how many minutes to wait between google pings when your API limit is hit
 BACKOFF_TIME = 30
 # Set your output file name here.
-output_filename = 'health-scores-pt2.csv'
+output_filename = 'latlngs.csv'
 # Set your input file here
 input_filename = "unique.csv"
 # Specify the column name in your input data that contains addresses here
-address_column_name = "address"
+address_column_name = "street_address"
 # Return Full Google Results? If True, full JSON results from Google are included in output
 RETURN_FULL_RESULTS = False
 
