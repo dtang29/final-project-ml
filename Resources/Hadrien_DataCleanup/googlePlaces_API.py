@@ -1,14 +1,19 @@
 """
 Python script for batch geocoding of addresses using the Google Geocoding API.
+
 This script allows for massive lists of addresses to be geocoded for free by pausing when the 
 geocoder hits the free rate limit set by Google (2500 per day).  If you have an API key for paid
 geocoding from Google, set it in the API key section.
+
 Addresses for geocoding can be specified in a list of strings "addresses". In this script, addresses
 come from a csv file with a column "Address". Adjust the code to your own requirements as needed.
+
 After every 500 successul geocode operations, a temporary file with results is recorded in case of 
 script failure / loss of connection later.
+
 Addresses and data are held in memory, so this script may need to be adjusted to process files line
 by line if you are processing millions of entries.
+
 Shane Lynn
 5th November 2016
 """
@@ -17,6 +22,7 @@ import pandas as pd
 import requests
 import logging
 import time
+from pprint import pprint
 
 logger = logging.getLogger("root")
 logger.setLevel(logging.DEBUG)
@@ -33,15 +39,15 @@ logger.addHandler(ch)
 # With a "Google Maps Geocoding API" key from https://console.developers.google.com/apis/, 
 # the daily limit will be 2500, but at a much faster rate.
 # Example: API_KEY = 'AIzaSyC9azed9tLdjpZNjg2_kVePWvMIBq154eA'
-API_KEY = 'AIzaSyB2eHyBYChHR5obFTjV9u9Jrhc7pxIJnQU'
+API_KEY = 'AIzaSyB_QzxsFhHEaC9BNqWT_XaVLqFscgj3HVs'
 # Backoff time sets how many minutes to wait between google pings when your API limit is hit
 BACKOFF_TIME = 30
 # Set your output file name here.
-output_filename = 'places.csv' 
+output_filename = 'cleanDatasets/placesResults.csv'
 # Set your input file here
-input_filename = "unique.csv"
+input_filename = "cleanDatasets/master_dataset2010.csv"
 # Specify the column name in your input data that contains addresses here
-address_column_name = "street_address"
+address_column_name = "business_name"
 # Return Full Google Results? If True, full JSON results from Google are included in output
 RETURN_FULL_RESULTS = False
 
@@ -62,7 +68,6 @@ addresses = data[address_column_name].tolist()
 # (remove this line / alter for your own dataset)
 # addresses = (data[address_column_name] + ',' + data['County'] + ',Ireland').tolist()
 
-
 #------------------	FUNCTION DEFINITIONS ------------------------
 
 def get_google_results(address, api_key=None, return_full_response=False):
@@ -79,42 +84,43 @@ def get_google_results(address, api_key=None, return_full_response=False):
                     is useful if you'd like additional location details for storage or parsing later.
     """
     # Set up your Geocoding url
-    places_url = "https://maps.googleapis.com/maps/api/place/details/json?address={}".format(address)
-    if api_key is not None:
-        places_url = places_url + "&key={}".format(api_key)
-        
+    # geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?address={}".format(address)
+    places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={}&inputtype=textquery&fields=formatted_address,name,rating,opening_hours,geometry".format(address)
+    if API_KEY is not None:
+        places_url = places_url + "&key={}".format(API_KEY)
+        print(places_url)
     # Ping google for the reuslts:
     results = requests.get(places_url)
     # Results will be in JSON format - convert to dict using requests functionality
     results = results.json()
-    
+
     # if there's no results or an error, return empty results.
-    if len(results['result']) == 0:
+    if len(results['candidates']) == 0:
         output = {
-            "icon" : None,
-            "place_id": None,
-            "rating": None,
-            "reviews": None,
-            "formatted_phone_number": None,
+            "formatted_address" : None,
+            "latitude": None,
+            "longitude": None,
             "name": None,
-            "types": None,
-            "website":None,
-            "permanently_closed":None
+            "rating": None
         }
     else:    
-        answer = results['result'][0]
+        answer = results['candidates'][0]
         output = {
-            "icon" : answer.get('formatted_address'),
-            "place_id": answer.get("place_id"),
+            "formatted_address" : answer.get('formatted_address'),
+            "latitude": answer.get('geometry').get('location').get('lat'),
+            "longitude": answer.get('geometry').get('location').get('lng'),
+            "name": answer.get('name'),
             "rating": answer.get("rating"),
-            "permanently_closed": answer.get("place_id"),
-            "reviews": answer.get("reviews"),
-            "formatted_phone_number": answer.get("formatted_phone_number"),
-            "name": answer.get("name"),
-            "types": answer.get("types"),
-            "website": answer.get("website")
-        }     
-   
+            "type": ",".join(answer.get('types'))
+        }
+        
+    # Append some other details:    
+    output['input_string'] = address
+    output['number_of_results'] = len(results['candidates'])
+    output['status'] = results.get('status')
+    if return_full_response is True:
+        output['response'] = results
+    
     return output
 
 #------------------ PROCESSING LOOP -----------------------------
@@ -160,10 +166,10 @@ for address in addresses:
     	logger.info("Completed {} of {} address".format(len(results), len(addresses)))
             
     # Every 500 addresses, save progress to file(in case of a failure so you have something!)
-    if len(results) % 500 == 0:
+    if len(results) % 100 == 0:
         pd.DataFrame(results).to_csv("{}_bak".format(output_filename))
 
 # All done
-logger.info("Finished pulling all places info!")
+logger.info("Finished geocoding all addresses")
 # Write the full results to csv using the pandas library.
 pd.DataFrame(results).to_csv(output_filename, encoding='utf8')
