@@ -47,9 +47,10 @@ output_filename = 'results.csv'
 # Set your input file here
 input_filename = "master_dataset_cleaned.csv"
 # Specify the column name in your input data that contains addresses here
-address_column_name = "business_name"
+business_column_name = "business_name"
 latitude_column_name = "latitude"
 longitude_column_name = "longitude"
+address_column_name = "full_address"
 # Return Full Google Results? If True, full JSON results from Google are included in output
 RETURN_FULL_RESULTS = False
 
@@ -58,19 +59,19 @@ RETURN_FULL_RESULTS = False
 # Read the data to a Pandas Dataframe
 data = pd.read_csv(input_filename, encoding='utf8')
 
-if address_column_name not in data.columns:
+if business_column_name not in data.columns:
 	raise ValueError("Missing Address column in input data")
 
 # Form a list of addresses for geocoding:
 # Make a big list of all of the addresses to be processed.
-# addresses = data[address_column_name].tolist()
+# addresses = data[business_column_name].tolist()
 
-address = data[[address_column_name, latitude_column_name, longitude_column_name]]
+address = data[[business_column_name, address_column_name, latitude_column_name, longitude_column_name]]
 
 # **** DEMO DATA / IRELAND SPECIFIC! ****
 # We know that these addresses are in Ireland, and there's a column for county, so add this for accuracy. 
 # (remove this line / alter for your own dataset)
-# addresses = (data[address_column_name] + ',' + data['County'] + ',Ireland').tolist()
+# addresses = (data[business_column_name] + ',' + data['County'] + ',Ireland').tolist()
 
 # limit = 2
 
@@ -95,7 +96,7 @@ address = data[[address_column_name, latitude_column_name, longitude_column_name
 
 #------------------	FUNCTION DEFINITIONS ------------------------
 
-def get_google_results(address, latitude, longitude, api_key=None, return_full_response=False):
+def get_google_results(business, address, latitude, longitude, api_key=None, return_full_response=False):
     """
     Get geocode results from Google Maps Geocoding API.
     
@@ -110,7 +111,7 @@ def get_google_results(address, latitude, longitude, api_key=None, return_full_r
     """
     # Set up your Geocoding url
     # geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?address={}".format(address)
-    places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={}&inputtype=textquery&fields=formatted_address,name,rating,geometry,price_level".format(address)
+    places_url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={}&inputtype=textquery&fields=formatted_address,name,rating,geometry,price_level".format(business)
     if API_KEY is not None:
         places_url = places_url + "&locationbias=point:{},{}".format(latitude, longitude)
         places_url = places_url + "&key={}".format(API_KEY)
@@ -141,7 +142,8 @@ def get_google_results(address, latitude, longitude, api_key=None, return_full_r
         }
         
     # Append some other details:    
-    output['input_string'] = address
+    output['input_string'] = business
+    output['input_address'] = address
     output['number_of_results'] = len(results['candidates'])
     output['status'] = results.get('status')
     if return_full_response is True:
@@ -160,16 +162,16 @@ def get_google_results(address, latitude, longitude, api_key=None, return_full_r
 # Create a list to hold results
 results = []
 # Go through each address in turn
-for address, latitude, longitude in zip(address.iloc[:,0], address.iloc[:,1], address.iloc[:,2]):
-    # While the address geocoding is not finished:
+for business, address, latitude, longitude in zip(business.iloc[:,0], business.iloc[:,1], business.iloc[:,2], business.iloc[:,3]):
+    # While the business geocoding is not finished:
     geocoded = False
     while geocoded is not True:
-        # Geocode the address with google
+        # Geocode the business with google
         try:
-            geocode_result = get_google_results(address, latitude, longitude, API_KEY, return_full_response=RETURN_FULL_RESULTS)
+            geocode_result = get_google_results(business, latitude, longitude, API_KEY, return_full_response=RETURN_FULL_RESULTS)
         except Exception as e:
             logger.exception(e)
-            logger.error("Major error with {}".format(address))
+            logger.error("Major error with {}".format(business))
             logger.error("Skipping!")
             geocoded = True
             
@@ -182,16 +184,16 @@ for address, latitude, longitude in zip(address.iloc[:,0], address.iloc[:,1], ad
             # If we're ok with API use, save the results
             # Note that the results might be empty / non-ok - log this
             if geocode_result['status'] != 'OK':
-                logger.warning("Error geocoding {}: {}".format(address, geocode_result['status']))
-            logger.debug("Geocoded: {}: {}".format(address, geocode_result['status']))
+                logger.warning("Error geocoding {}: {}".format(business, geocode_result['status']))
+            logger.debug("Geocoded: {}: {}".format(business, geocode_result['status']))
             results.append(geocode_result)           
             geocoded = True
 
-    # Print status every 100 addresses
+    # Print status every 100 businesses
     if len(results) % 1 == 0:
-    	logger.info("Completed {} of {} address".format(len(results), len(address)))
+    	logger.info("Completed {} of {} business".format(len(results), len(business)))
             
-    # Every 500 addresses, save progress to file(in case of a failure so you have something!)
+    # Every 500 businesses, save progress to file(in case of a failure so you have something!)
     if len(results) % 1 == 0:
         pd.DataFrame(results).to_csv("{}_bak".format(output_filename))
 
