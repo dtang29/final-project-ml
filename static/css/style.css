@@ -12,6 +12,11 @@ body {
     font-weight: 800 !important;
   }
 
+  h2 .inspiration {
+    padding-left: 5%;
+    text-align: left;
+  }
+
   .swiper-container {
     width: 600px;
     height: 300px;

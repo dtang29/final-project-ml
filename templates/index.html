@@ -30,6 +30,8 @@
       position: relative;
       height: 100%;
     }
+
+
     /* body {
       background: #eee;
       font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -42,6 +44,11 @@
       width: 100%;
       height: 100%;
     }
+
+    .inspiration {
+      text-align: left;
+    }
+
     .swiper-slide {
       text-align: center;
       font-size: 18px;
@@ -63,14 +70,30 @@
 
     .slide1 {
       background: linear-gradient(0deg, #000A0D 0%, #008DB8 100%);
-      background-image: url('../static/images/bg-image2.jpg');
+      background-image: url('../static/images/bg-image3.jpg');
       background-size:cover;
       
     }
 
-    .slide2 {
-      display: grid;
-      height: 100%;
+
+    .embed-responsive-item {
+      position: relative;
+      padding-top: 50px;
+      padding-left: 120px;
+    }
+
+    .slide7 .embed-responsive-item,
+    .logistic .embed-responsive-item {
+      padding-left:1%;
+      max-width: 95%;
+      margin:auto;
+    }
+
+    .slide8,
+    .slide10 {
+      position: relative;
+      padding-left: 120px;
+      padding-right: 120px;
     }
 
     .center-fit {
@@ -80,16 +103,34 @@
     }
 
     .byline {
-      font-size: .4em;
+      font-size: .3em;
       font-style:italic;
       line-height: 2.2em;
       font-weight: 500;
-      color: white;
+      color: black;
+    }
+
+    .list-group-item {
+      text-align: left;
+    }
+
+    .swiper-text .sub-div {
+      font-size: .45em;
+      line-height: 2.2em;
+      font-weight: 350;
+      color: black;
+    }
+
+
+    .col-md-6 {
+      padding-top: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
     }
 
     .swiper-text {
         position: absolute;
-        font-size: 2.5em;
+        font-size: 3em;
         line-height: 1.2em;
         font-weight: 600;
         top: 28%;
@@ -98,34 +139,55 @@
         margin: auto;
         padding-right: 30px;
         max-width: 600px;
-        color: white;
+        color: black;
       }
-
-    @media (max-width: 700px) {
-      .swiper-text {
-        position: absolute;
-        font-size: 2.3em;
-        line-height: 1.2em;
-        font-weight: 600;
-        top: 10%;
-        right: 20%;
-        left: 20%;
-        margin: 0;
-        padding-right: 30px;
-        max-width: 600px;
-        color: white;
-      }
-    }
 
     .swiper-text .nav {
       display: block;
       position: absolute;
       font-size: 20px;
-      color:honeydew;
+      color:black;
       font-weight: 700;
       -webkit-transform: translate(-50%, 0);
       left: 50%;
     }
+    @media (max-width: 500px) {
+      .swiper-text {
+        position: absolute;
+        font-size: 2.3em;
+        line-height: 1.2em;
+        font-weight: 600;
+        top: 5%;
+        right: 20%;
+        left: 20%;
+        margin: 0;
+        padding-right: 30px;
+        max-width: 600px;
+        color: black;
+      }
+
+      .swiper-text .nav {
+        display: block;
+        position: absolute;
+        font-size: 20px;
+        color:white;
+        font-weight: 700;
+        -webkit-transform: translate(-50%, 0);
+        left: 50%;
+      }
+
+      .byline {
+      font-size: .3em;
+      font-style:italic;
+      line-height: 2.2em;
+      font-weight: 500;
+      color: black;
+    }
+
+    
+    }
+ 
+  
 
   </style>
 
@@ -141,13 +203,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Logo</a>
+      <a class="navbar-brand" href="#">The Last Supper</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="/plots">Plots</a></li>
-        <li><a href="#">Predictive Analysis</a></li>
+        <!-- <li class="active"><a href="#">Home</a></li> -->
         <li><a href="https://github.com/dtang29/final-project-ml">Github</a></li>
       </ul>
     </div>
@@ -161,6 +221,9 @@
     <div class="swiper-slide slide1">
         <div class="swiper-text">
           <div class="title_div">
+            The Last Supper
+          </div>
+          <div class="sub-div">
             A Predictive Viability Model for San Francisco Restaurants
           </div>
             <div class="byline" style="opacity: 1;">
@@ -171,91 +234,174 @@
             </div>
         </div>
     </div>
+
     <div class="swiper-slide slide2">
-        <img class="center-fit" src="../static/images/process.jpeg">
-    </div>
-    <div class="swiper-slide slide3">
-      <img class="center-fit" src="../static/images/data-cleanup-process.jpeg">
-  </div>
-    <div class="swiper-slide slide4">
-        <!-- 16:9 aspect ratio -->
-      <!-- <div class="embed-responsive embed-responsive-16by9"> -->
-          <iframe class="embed-responsive-item" src="https://public.tableau.com/views/SFREstaurants/Dashboard3?:showVizHome=no&:embed=true" width="90%" height="700"></iframe>
-      <!-- </div> -->
+        
+        <div class="row display-flex">
+            <div class="page-header">
+                <h1>Overview</h1>
+            </div>     
+            <div class="col-sm-6 col-md-6">
+                <p>Last October, San Francisco eclipsed New York City by claiming seven Michelin three-star restaurants, and 55 total restaurants with Michelin stars. The Bay Area has unequivocally become a haven for restaurants that are equal parts creative, ambitious and expensive.</p>
+                <p>But what has happened to the broader set of reasonable, modest businesses that battle minimum wages hikes, soaring rent costs, and health care policies implemented by the city? Using demographic and business information and overlaying observations in social media sentiment, we have mapped out trends in business viability, and located areas where, and how restaurants can be expected to survive in an increasingly challenging market. </p>
+                <p>Using these renderings, you might even be able to find your next favorite spot in time to check it out, and save it before it goes under.</p>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="thumbnail">
+                  <img src="../static/images/overview.jpg" alt="">
+                </div>
+              </div>
+      </div>
+
 
     </div>
-    <div class="swiper-slide">Slide 5</div>
-    <div class="swiper-slide">Slide 6</div>
-    <div class="swiper-slide">Slide 7</div>
-    <div class="swiper-slide">Slide 8</div>
-    <div class="swiper-slide">Slide 9</div>
-    <div class="swiper-slide">Slide 10</div>
+
+    <div class="swiper-slide slide3">
+        <img class="center-fit" src="../static/images/process.jpeg">
+    </div>
+    <div class="swiper-slide slide4">
+      <img class="center-fit" src="../static/images/data-cleanup-process.jpeg">
   </div>
-  <!-- Add Pagination -->
+    <div class="swiper-slide slide5">
+          <iframe class="embed-responsive-item" src="https://public.tableau.com/views/SFREstaurants/Dashboard3?:showVizHome=no&:embed=true" width="95%" height="900"></iframe>
+    </div>
+
+    <div class="swiper-slide slide6">
+          <iframe class="embed-responsive-item" src="https://public.tableau.com/views/Spatial_Ai_Analysis/Story1?:embed=y&:showVizHome=no&:embed=true" width="95%" height="900"></iframe>
+    </div>
+
+    <div class="swiper-slide slide7">
+      <iframe class="embed-responsive-item" src="https://nbviewer.jupyter.org/github/dtang29/final-project-ml/blob/master/Resources/Hadrien_DataCleanup/Logistic%20Regression%20Prediction%20Model%2C%20or%20A%20Lesson%20in%20the%20Pitfalls%20of%20Data.ipynb" width="100%" height="100%"></iframe>
+    </div>
+
+    <div class="swiper-slide logistic">
+        <iframe class="embed-responsive-item" src="https://nbviewer.jupyter.org/github/dtang29/final-project-ml/blob/master/Resources/Hadrien_DataCleanup/KNN%2C%20or%20Hope%20for%20a%20Semi-Descent%20ML%20Model.ipynb" width="100%" height="100%"></iframe>
+    </div>
+
+    <div class="swiper-slide slide8">
+        <div class="page-header">
+            <h1>Resources</h1>
+        </div>
+
+        <div class="Resources"> 
+            <div class="inspiration">
+              <h2>Inspiration</h2>
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                   <a href="https://medium.com/topos-ai/the-next-wave-predicting-the-future-of-coffee-in-new-york-city-23a0c5d62000">The Future of Coffee In New York City</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="https://www.sfchronicle.com/food/article/2017-wasn-t-the-greatest-year-for-San-Francisco-12480441.php">2017 wasn't the greatest year for San Francisco</a>
+
+                </li>
+                <li class="list-group-item">
+                    <a href="http://blog.spatial.ai/how-to-predict-the-best-neighborhood-for-a-retailer-within-any-market">Using Yelp Data to Predict Restaurant Closure – Towards Data Science</a>
+                </li>
+
+              <li class="list-group-item">
+                  <a href="https://towardsdatascience.com/using-yelp-data-to-predict-restaurant-closure-8aafa4f72ad6">How to Predict the best neighborhood for a reatiler within any market</a>
+              </li>
+                
+            </ul>
+        </div>
+           
+          <div class="inspiration">
+              <h2>Data Sources</h2>
+          </div>
+
+          <ul class="list-group">
+              <li class="list-group-item">
+                 <a href="https://data.sfgov.org/Health-and-Social-Services/Restaurant-Scores-LIVES-Standard/pyih-qa8i/data">Health Scores</a>
+              </li>
+              <li class="list-group-item">
+                  <a href="https://data.sfgov.org/Economy-and-Community/Map-of-Registered-Business-Locations/ednt-jx6u">Registered Businesses in San Francisco</a>
+              </li>
+              <li class="list-group-item">
+                  <a href="https://developers.google.com/places/web-service/intro">Google Places API</a>
+              </li>
+              <li class="list-group-item">
+                  <a href="https://spatial.ai/">Spatial API</a>
+              </li>
+          </ul>
+      
+      </div>
+    <div class="swiper-slide slide9">
+        <div class="page-header">
+            <h1>Team</h1>
+        </div>
+        <div class="row display-flex">
+            <div class="col-sm-6 col-md-3">
+              <div class="thumbnail">
+                <img src="../static/images/hadrien.jpg" alt="">
+                <div class="caption">
+                  <h3>Hadrien Picq</h3>
+                  <p><a href="https://github.com/HP-Nunes" class="btn btn-default" role="button">Github</a> <a href="https://twitter.com/geocuriosity" class="btn btn-default" role="button">Twitter</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                  <img src="../static/images/daniel.jpg" alt="">
+                  <div class="caption">
+                    <h3>Daniel Tang</h3>
+                    <p><a href="https://github.com/dtang29" class="btn btn-default" role="button">Github</a> <a href="http://www.linkedin.com/in/dtang1529" class="btn btn-default" role="button">Linkedin</a></p>
+                  </div>
+                </div>
+              </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="thumbnail">
+                <img src="../static/images/Charlie.jpg" alt="">
+                <div class="caption">
+                  <h3>Charlie Fortuno</h3>
+                  <p><a href="https://github.com/c42know" class="btn btn-default" role="button">Github</a> <a href="https://www.linkedin.com/in/charlesfortuno/" class="btn btn-default" role="button">Linkedin</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                  <img src="" alt="">
+                  <div class="caption">
+                    <h3>Alex Pundyk</h3>
+                    <p><a href="https://github.com/apundyk" class="btn btn-default" role="button">Github</a></p>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+        <div class="swiper-slide slide10">
+            <div class="page-header">
+                <h1>Acknowledgements</h1>
+            </div>      
+          <ul class="list-group">
+              <li class="list-group-item">
+                  Thanks <a href="https://twitter.com/droxey?lang=en">@droxey</a> for being an awesome instructor and teaching us everything</a>
+              </li>
+              <li class="list-group-item">
+                 Thanks @kataquino & @PeterGardner & @Bhargav for being wonderful TAs
+
+              </li>
+              <li class="list-group-item">
+                  Thanks @spatialai & Griffin Morris, for providing us with the spatial API
+              </li>
+          </ul>
+        </div>
+
+    </div>
+      <!-- Add Pagination -->
   <div class="swiper-pagination"></div>
+  </div>
 
   <!-- <div class="swiper-button-prev" style='opacity: 0.4;'></div>
   <div class="swiper-button-next" style='opacity: 0.4;'></div> -->
 </div>
   
 
-
-
-<!-- <header class="masthead text-center text-white">
-  <div class="masthead-content">
-    <div class="container">
-      <h1 class="masthead-heading mb-0">San Francisco Restaurants</h1>
-      <h2 class="masthead-subheading mb-0">A Predictive Viability Model Analysis</h2>
-    </div>
-  </div>
-</header> -->
-
-<!-- <section class="tableau">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-2">
-        <div class="p-5">
-          <img  src="../static/images/bg-image.jpg" alt="">
-        </div>
-      </div>
-      <div class="col-lg-6 order-lg-1">
-        <div class="p-5">
-          <h2 class="display-4">Tableau embedded</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>  -->
-
-<!-- <div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-    </div>
-    <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
-    </div>
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- 
-<footer class="container-fluid text-center">
-  <p>Project By: Alex Pundyk, Charlie Fortuno, Daniel Tang, Hadrien Picq </p>
-</footer> -->
 
 <script>
    var swiper = new Swiper('.swiper-container', {
@@ -272,8 +418,15 @@
     },
     });
 
+    window.addEventListener("keydown", function(e) {
+        // space and arrow keys
+        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+            e.preventDefault();
+        }
+    }, false);
+
     $('.swiper-slide').click(function(e) {
-      e.preventDefault();
+      // e.preventDefault();
       swiper.slideNext();
     });
 
@@ -287,6 +440,9 @@
           swiper.slideNext();
       }
     };
+
+
+
   </script>
 
 
